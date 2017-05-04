@@ -89,7 +89,7 @@
 
                                         <!--未中 加上statue-hit-no-->
                                         <div class="hotc-right statue-hit-no" v-if="match.cell.on_target==='0'">
-                                            <div class="left-statue">未</br>中</div>
+                                            <div class="left-statue">未<br/>中</div>
                                             <div class="right-predict">
                                                 <p>{{match.cell.probability}}<em>%</em></p>
                                                 <p>{{match.cell.predict_result|predictResult}}
@@ -98,7 +98,7 @@
                                         </div>
 
                                         <div class="hotc-right" v-if="match.cell.on_target==='1'">
-                                            <div class="left-statue">命</br>中</div>
+                                            <div class="left-statue">命<br/>中</div>
                                             <div class="right-predict">
                                                 <p>{{match.cell.probability}}<em>%</em></p>
                                                 <p>{{match.cell.predict_result|predictResult}}
@@ -112,7 +112,7 @@
                             <p class="txt-predict">
                                 赛前随赔率变化，预测概率也将有所变化。
 
-                                </br>离开赛时间越近预测概率准确性也就越高哦。
+                                <br/>离开赛时间越近预测概率准确性也就越高哦。
 
                             </p>
                         </template>
@@ -132,8 +132,8 @@
     import Prompt from '~components/prompt'
     import axios from '~plugins/axios'
     export default {
-      fetch ({store}) {
-        return axios.get(`/library/aggregate/awesome_predict`).then((resp) => {
+      async asyncData ({store}) {
+        let predict = await axios.get(`/library/aggregate/awesome_predict`).then((resp) => {
           if (resp.status === 200) {
             if (resp.data.status === '100') {
               return resp.data.data
@@ -148,11 +148,10 @@
           return data
         }).catch(e => {
           store.commit('bfyc/AWESOME_PREDICT', {matches: []})
+          return {}
         })
-      },
-      data () {
         return {
-          cur: this.curr_expect
+          cur: predict.curr_expect
         }
       },
 
@@ -195,11 +194,7 @@
           this.cur = currExpect
         }
       },
-      mounted () {
-        if (this.curr_expect) {
-          this.cur = this.curr_expect
-        }
-      },
+
       methods: {
         changeExpect ({expect}) {
           this.cur = expect
