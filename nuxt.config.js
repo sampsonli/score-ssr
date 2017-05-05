@@ -39,5 +39,8 @@ module.exports = {
             }
         }
     },
-    srcDir: 'app/'
+    srcDir: 'app/',
+    generate: {
+        interval: 2000
+    }
 }
