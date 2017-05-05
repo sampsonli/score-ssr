@@ -20,4 +20,7 @@ export default {
   position: sticky;
   top: 0
 }
+  a{
+    color: #ffffff;
+  }
 </style>
