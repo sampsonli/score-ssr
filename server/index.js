@@ -12,17 +12,17 @@ app.set('port', port)
 
 // Import API Routes
 app.use((req, resp, next) => {
-  if (req.originalUrl.indexOf('/ews') === 0) {
-    forwardRequest({
-      req,
-      resp,
-      host: 'ews.500.com',
-      ip: '43.247.69.20',
-      path: req.originalUrl.replace('/ews', '')
-    })
-  } else {
-    next()
-  }
+    if (req.originalUrl.indexOf('/ews') === 0) {
+        forwardRequest({
+            req,
+            resp,
+            host: 'ews.500.com',
+            ip: '43.247.69.20',
+            path: req.originalUrl.replace('/ews', '')
+        })
+    } else {
+        next()
+    }
 })
 
 // Import and Set Nuxt.js options
@@ -35,10 +35,10 @@ app.use(nuxt.render)
 
 // Build only in dev mode
 if (config.dev) {
-  nuxt.build()
+    nuxt.build()
   .catch((error) => {
-    console.error(error) // eslint-disable-line no-console
-    process.exit(1)
+      console.error(error) // eslint-disable-line no-console
+      process.exit(1)
   })
 }
 

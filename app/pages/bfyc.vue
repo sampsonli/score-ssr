@@ -31,24 +31,24 @@ Vue.use(vueTap)
 
 export default{
 
-      computed: {
-        title () {
-          switch (this.$route.path.substring(this.$route.path.lastIndexOf('/'))) {
-            case '/predict': return '精选预测'
-            case '/record': return '战绩特征'
-            case '/strength': return '实力对比'
-            case '/hotcool': return '冷热分布'
-            default: return '比分预测'
-          }
-        }
+        computed: {
+            title () {
+                switch (this.$route.path.substring(this.$route.path.lastIndexOf('/'))) {
+                case '/predict': return '精选预测'
+                case '/record': return '战绩特征'
+                case '/strength': return '实力对比'
+                case '/hotcool': return '冷热分布'
+                default: return '比分预测'
+                }
+            }
 
-      },
-      methods: {
+        },
+        methods: {
 
-      },
-      mounted () {
+        },
+        mounted () {
 //            入口
-      }
+        }
 
     }
 </script>

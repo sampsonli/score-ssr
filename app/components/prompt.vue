@@ -18,52 +18,52 @@
 <script>
     const _baseUrl = 'http://tccache.500.com/mobile/widget/empty/images/'
 const typeMap = {
-      'network-error': {
-        img: '18.png'
-      },
-      'loading': {
-        img: 'load.gif',
-        tip0: '正在加载中...'
-      },
-      'normal': {
-        img: '07.png'
-      },
-      'no-match-fball': {img: '08.png'},
-      'no-match-bball': {img: '09.png'},
-      'star': {img: '10.png'},
-      'no-data': {img: '12.png', tip0: '暂无数据'}
+        'network-error': {
+            img: '18.png'
+        },
+        'loading': {
+            img: 'load.gif',
+            tip0: '正在加载中...'
+        },
+        'normal': {
+            img: '07.png'
+        },
+        'no-match-fball': {img: '08.png'},
+        'no-match-bball': {img: '09.png'},
+        'star': {img: '10.png'},
+        'no-data': {img: '12.png', tip0: '暂无数据'}
     }
 export default {
-      props: {
-        type: {
-          type: String,
-          required: false,
-          default: 'loading',
-          validator (type) {
-            return typeMap[type]
-          }
+        props: {
+            type: {
+                type: String,
+                required: false,
+                default: 'loading',
+                validator (type) {
+                    return typeMap[type]
+                }
+            },
+            tip0: {
+                type: String
+            },
+            tip1: {
+                type: String
+            },
+            btnText: {
+                type: String
+            }
         },
-        tip0: {
-          type: String
+        data () {
+            return {imageUrl: null, message: undefined}
         },
-        tip1: {
-          type: String
+        methods: {
+            clickbtn () {
+                this.$emit('btnclick')
+            }
         },
-        btnText: {
-          type: String
+        mounted () {
+            this.imageUrl = _baseUrl + typeMap[this.type].img
         }
-      },
-      data () {
-        return {imageUrl: null, message: undefined}
-      },
-      methods: {
-        clickbtn () {
-          this.$emit('btnclick')
-        }
-      },
-      mounted () {
-        this.imageUrl = _baseUrl + typeMap[this.type].img
-      }
     }
 
 </script>

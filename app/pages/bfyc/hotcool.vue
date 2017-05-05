@@ -98,92 +98,71 @@
 
 <script type="text/javascript">
     import Prompt from '~components/prompt'
-    import axios from '~plugins/axios'
-    export default{
-      components: {
-        Prompt
-      },
-      fetch ({store}) {
-        return axios.get(`/library/aggregate/coldhot_distribute`).then((resp) => {
-          if (resp.status === 200) {
-            if (resp.data.status === '100') {
-              return resp.data.data
-            } else {
-              throw new Error(resp.data.message)
-            }
-          } else { // http 请求错误
-            throw new Error(resp.message)
-          }
-        }).then((data) => {
-          store.commit('bfyc/AWESOME_PREDICT', data)
-          return data
-        }).catch(e => {
-          store.commit('bfyc/AWESOME_PREDICT', {
-            matches: []
-          })
-        })
-      },
-      computed: {
-        coldHot: function () {
-          return this.$store.state.bfyc.coldhot_distribute
-        },
-        curStatus: function () {
-          let curStatus = {
-            latest: false,
-            history: false
-          }
-          if (this.coldHot && this.coldHot.matches) {
-            this.coldHot.matches.forEach(match => {
-              if (match.status !== '4') {
-                curStatus.latest = true
-              } else {
-                curStatus.history = true
-              }
-            })
-          }
-          return curStatus
-        }
-      },
-      mounted () {
-            /* if (!this.coldHot) {
-             this.$store.dispatch('fetchColdHotDistribute')
-             } */
-      },
-      methods: {
-        goAnalysis: function ({fid}) {
-          location.href = `/score/detail.html?odds=bifa#/footballdetail/odds/${fid}`
-        },
-        colorClass (desc) {
-          switch (desc) {
-            case '胜过冷':
-            case '负过冷':
-            case '平局过冷':
-              return 'too-cold'
-            case '胜过热':
-            case '负过热':
-            case '平局过热':
-              return ''
-            case '规模较小':
-            case '规模适中':
-              return 'too-draw'
-            default:
-              return ''
-          }
-        }
-      },
 
-      filters: {
-        score: (match) => {
-          if (match.homescore && match.awayscore) {
-            return `${match.homescore}:${match.awayscore}`
-          } else {
-            return 'VS'
-          }
+    export default{
+        components: {
+            Prompt
         },
-        makeTitle: (item) => {
-          return item.order + ' ' + item.simpleleague + ' ' + item.matchtime.slice(5)
+        fetch ({store}) {
+            return store.dispatch('bfyc/fetchColdHotDistribute')
+        },
+        computed: {
+            coldHot: function () {
+                return this.$store.state.bfyc.coldhot_distribute
+            },
+            curStatus: function () {
+                let curStatus = {
+                    latest: false,
+                    history: false
+                }
+                if (this.coldHot && this.coldHot.matches) {
+                    this.coldHot.matches.forEach(match => {
+                        if (match.status !== '4') {
+                            curStatus.latest = true
+                        } else {
+                            curStatus.history = true
+                        }
+                    })
+                }
+                return curStatus
+            }
+        },
+
+        methods: {
+            goAnalysis: function ({fid}) {
+                location.href = `/score/detail.html?odds=bifa#/footballdetail/odds/${fid}`
+            },
+            colorClass (desc) {
+                switch (desc) {
+                case '胜过冷':
+                case '负过冷':
+                case '平局过冷':
+                    return 'too-cold'
+                case '胜过热':
+                case '负过热':
+                case '平局过热':
+                    return ''
+                case '规模较小':
+                case '规模适中':
+                    return 'too-draw'
+                default:
+                    return ''
+                }
+            }
+        },
+
+        filters: {
+            score: (match) => {
+                if (match.homescore && match.awayscore) {
+                    return `${match.homescore}:${match.awayscore}`
+                } else {
+                    return 'VS'
+                }
+            },
+            makeTitle: (item) => {
+                return item.order + ' ' + item.simpleleague + ' ' + item.matchtime.slice(5)
+            }
         }
-      }
 
     }
 </script>

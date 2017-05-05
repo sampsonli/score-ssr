@@ -11,6 +11,8 @@ module.exports = {
     'html'
   ],
   // add your custom rules here
-  rules: {},
+  rules: {
+    "indent": [2, 4],//缩进风格
+  },
   globals: {}
 }

@@ -165,51 +165,38 @@
 
 <script>
     import Prompt from '~components/prompt.vue'
-    import axios from '~plugins/axios'
+
     export default{
-      fetch  ({store}) {
-        return axios.get(`/library/aggregate/combat_feature`).then((resp) => {
-          if (resp.status === 200) {
-            if (resp.data.status === '100') {
-              return resp.data.data
-            } else {
-              throw new Error(resp.data.message)
+        fetch  ({store}) {
+            return store.dispatch('bfyc/fetchCombatFeature')
+        },
+        components: {
+            Prompt
+        },
+        data () {
+            return {
+                tab: 'result'
             }
-          } else { // http 请求错误
-            throw new Error(resp.message)
-          }
-        }).then((data) => {
-          store.commit('bfyc/COMBAT_FEATURE', data)
-          return data
-        })
-      },
-      components: {
-        Prompt
-      },
-      data () {
-        return {
-          tab: 'result'
-        }
-      },
-      computed: {
-        record: function () {
+        },
+        computed: {
+            record: function () {
                 // console.log(this.$store.state.combat_feature);
-          return this.$store.state.bfyc.combat_feature
-        }
+                return this.$store.state.bfyc.combat_feature
+            }
 
-      },
+        },
 
-      methods: {
-        onTab: function (type) {
-          this.tab = type
-        },
-        goAnalysis: function ({fid}) {
-          location.href = `/score/detail.html?analysis=record#/footballdetail/analysis/${fid}`
-        },
-        noEmpty: function (obj) {
-          return !!Object.keys(obj).length
+        methods: {
+            onTab: function (type) {
+                this.tab = type
+            },
+            goAnalysis: function ({fid}) {
+                location.href = `/score/detail.html?analysis=record#/footballdetail/analysis/${fid}`
+            },
+            noEmpty: function (obj) {
+                return !!Object.keys(obj).length
+            }
         }
-      }
 
     }
 </script>

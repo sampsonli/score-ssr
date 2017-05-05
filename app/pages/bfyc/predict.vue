@@ -130,97 +130,80 @@
 
 <script type="text/ecmascript-6">
     import Prompt from '~components/prompt'
-    import axios from '~plugins/axios'
     export default {
-      async asyncData ({store}) {
-        let predict = await axios.get(`/library/aggregate/awesome_predict`).then((resp) => {
-          if (resp.status === 200) {
-            if (resp.data.status === '100') {
-              return resp.data.data
-            } else {
-              throw new Error(resp.data.message)
+        async asyncData ({store}) {
+            let predict = await store.dispatch('bfyc/fetchAwesomePredict')
+            return {
+                cur: predict.curr_expect
             }
-          } else { // http 请求错误
-            throw new Error(resp.message)
-          }
-        }).then((data) => {
-          store.commit('bfyc/AWESOME_PREDICT', data)
-          return data
-        }).catch(e => {
-          store.commit('bfyc/AWESOME_PREDICT', {matches: []})
-          return {}
-        })
-        return {
-          cur: predict.curr_expect
-        }
-      },
+        },
 
-      components: {
-        Prompt
-      },
+        components: {
+            Prompt
+        },
 
-      computed: {
-        good_news () {
-          return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.good_news
+        computed: {
+            good_news () {
+                return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.good_news
+            },
+            expect_list () {
+                return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.expect_list
+            },
+            curr_expect () {
+                return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.curr_expect
+            },
+            matches () {
+                return this.$store.state.bfyc.awesome_predict && this.cur && this.$store.state.bfyc.awesome_predict.allMatches[this.cur]
+            },
+            curStatus: function () {
+                let curStatus = {
+                    latest: false,
+                    history: false
+                }
+                if (this.matches) {
+                    this.matches.forEach(match => {
+                        if (match.status !== '4') {
+                            curStatus.latest = true
+                        } else {
+                            curStatus.history = true
+                        }
+                    })
+                }
+                return curStatus
+            }
         },
-        expect_list () {
-          return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.expect_list
+        watch: {
+            curr_expect (currExpect) {
+                this.cur = currExpect
+            }
         },
-        curr_expect () {
-          return this.$store.state.bfyc.awesome_predict && this.$store.state.bfyc.awesome_predict.curr_expect
-        },
-        matches () {
-          return this.$store.state.bfyc.awesome_predict && this.cur && this.$store.state.bfyc.awesome_predict.allMatches[this.cur]
-        },
-        curStatus: function () {
-          let curStatus = {
-            latest: false,
-            history: false
-          }
-          if (this.matches) {
-            this.matches.forEach(match => {
-              if (match.status !== '4') {
-                curStatus.latest = true
-              } else {
-                curStatus.history = true
-              }
-            })
-          }
-          return curStatus
-        }
-      },
-      watch: {
-        curr_expect (currExpect) {
-          this.cur = currExpect
-        }
-      },
 
-      methods: {
-        changeExpect ({expect}) {
-          this.cur = expect
-          if (!this.$store.state.bfyc.awesome_predict.allMatches[this.cur] || !this.$store.state.bfyc.awesome_predict.allMatches[this.cur].length) {
-            this.$store.dispatch('bfyc/fetchAwesomePredict', this.cur)
-          }
+        methods: {
+            changeExpect ({expect}) {
+                this.cur = expect
+                if (!this.$store.state.bfyc.awesome_predict.allMatches[this.cur] || !this.$store.state.bfyc.awesome_predict.allMatches[this.cur].length) {
+                    this.$store.dispatch('bfyc/fetchAwesomePredict', this.cur)
+                }
+            },
+            goAnalysis: function ({fid}) {
+                location.href = `/score/detail.html#/footballdetail/predict/${fid}`
+            }
         },
-        goAnalysis: function ({fid}) {
-          location.href = `/score/detail.html#/footballdetail/predict/${fid}`
-        }
-      },
-      filters: {
-        predictResult: (pr) => {
+        filters: {
+            predictResult: (pr) => {
 //                3-主胜 1-平局 0-主负
-          switch (pr) {
-            case '1':
-              return '平局'
-            case '0':
-              return '主负'
-            case '3':
-              return '主胜'
-          }
-        },
-        fdate: (cur) => {
-          return cur && cur.replace('-', '年').replace('-', '月') + '日'
+                switch (pr) {
+                case '1':
+                    return '平局'
+                case '0':
+                    return '主负'
+                case '3':
+                    return '主胜'
+                }
+            },
+            fdate: (cur) => {
+                return cur && cur.replace('-', '年').replace('-', '月') + '日'
+            }
         }
-      }
     }
 </script>
