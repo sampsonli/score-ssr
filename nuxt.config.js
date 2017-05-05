@@ -39,6 +39,11 @@ module.exports = {
             }
         }
     },
+    loading: {
+        color: 'orange',
+        height: '.1rem',
+        duration: '2000'
+    },
     srcDir: 'app/',
     generate: {
         interval: 2000

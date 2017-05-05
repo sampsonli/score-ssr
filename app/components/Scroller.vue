@@ -21,20 +21,12 @@
 
                 const transform = typeof document.body.style.transform !== 'undefined' ? 'transform' : 'webkitTransform'
 
-                let flag = 0
                 const scrollerObj = new Scroller(function (left, top, zoom) {
-                    let doMove = () => {
-                        flag = 0
-                        scrollContent.style[transform] = 'translate3d(' + (-left) + 'px,' + (-top) + 'px,0) scale(' + zoom + ')'
-                    }
-                    if (flag === 0) {
-                        flag = 1
-                        requestAnimationFrame(doMove)
-                    }
+                    scrollContent.style[transform] = 'translate3d(' + (-left) + 'px,' + (-top) + 'px,0) scale(' + zoom + ')'
                 }, {
                     scrollingX: false,
                     scrollingY: true,
-//                    bouncing: true,
+                    bouncing: false,
                     animationDuration: 150
                 })
 

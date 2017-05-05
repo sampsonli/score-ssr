@@ -1,16 +1,17 @@
 <template>
-    <div class="v124-wrap l-full l-flex-column">
+    <div class="l-full l-flex-column">
         <!--head begin-->
-        <header id="uiHead" class="ui-head">
-            <div class="ui-head-in">
-                <div class="ui-head-l">
-                    <span class="ui-head-btn1" onclick="history.back()">返回</span>
-                </div>
-                <div class="ui-head-m">
-                    <h2 class="ui-head-tit">{{title}}</h2>
-                </div>
+        <div class="headernav">
+            <div class="headernavL"><a onclick="home.back()" class="home-icon">返回</a></div>
+            <ul class="toggle-cz">
+                <li onclick="location.href='#/football'" class="cur">足球</li>
+                <li onclick="location.href='#/basketball'" class="">篮球</li>
+            </ul>
+            <div class="headernavR">
+                <a href="../score/match_center/index.html?from=web_home" class="league-icon"></a>
+                <a class="sx-icon" onclick="home.showSelect();" href="javascript:;"></a>
             </div>
-        </header>
+        </div>
 
 
         <!--顶部的tab-->
@@ -23,6 +24,11 @@
     </div>
 
 </template>
+<style>
+    .headernav{
+        position: relative;
+    }
+</style>
 
 <script>
     import Vue from 'vue'
@@ -32,15 +38,6 @@ Vue.use(vueTap)
 export default{
 
         computed: {
-            title () {
-                switch (this.$route.path.substring(this.$route.path.lastIndexOf('/'))) {
-                case '/predict': return '精选预测'
-                case '/record': return '战绩特征'
-                case '/strength': return '实力对比'
-                case '/hotcool': return '冷热分布'
-                default: return '比分预测'
-                }
-            }
 
         },
         methods: {
