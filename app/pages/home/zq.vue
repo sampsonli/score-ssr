@@ -92,6 +92,9 @@
             toggleNav () {
                 this.showNav = !this.showNav
             }
+        },
+        head: {
+            title: '足球比分-500彩票网'
         }
     }
 

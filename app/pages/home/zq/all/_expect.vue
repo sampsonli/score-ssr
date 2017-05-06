@@ -60,7 +60,7 @@
     import MatchesScroller from '~components/matches_scroller'
     export default {
         fetch ({store, params}) {
-            if (store.state.home.zq.jczq.allMatches[params.expect]) {
+            if (store.state.home.zq.all.allMatches[params.expect]) {
                 return Promise.resolve()
             } else {
                 return store.dispatch('home/fetchZqAllMatches', params.expect)

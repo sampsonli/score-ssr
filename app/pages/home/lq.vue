@@ -24,5 +24,10 @@
     }
 </style>
 <script>
+    export default {
+        head: {
+            title: '篮球比分-500彩票网'
+        }
+    }
 
 </script>
