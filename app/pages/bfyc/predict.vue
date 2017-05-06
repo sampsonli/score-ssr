@@ -132,9 +132,15 @@
     import Prompt from '~components/prompt'
     export default {
         async asyncData ({store}) {
-            let predict = await store.dispatch('bfyc/fetchAwesomePredict')
-            return {
-                cur: predict.curr_expect
+            if (store.state.bfyc.awesome_predict) {
+                return {
+                    cur: store.state.bfyc.awesome_predict.curr_expect
+                }
+            } else {
+                let predict = await store.dispatch('bfyc/fetchAwesomePredict')
+                return {
+                    cur: predict.curr_expect
+                }
             }
         },
 

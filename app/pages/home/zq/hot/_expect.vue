@@ -44,7 +44,11 @@
     import MatchesScroller from '~components/matches_scroller'
     export default {
         fetch ({store}) {
-            return store.dispatch('home/fetchHotMatches')
+            if (store.state.home.zq.hot.allMatches[store.state.home.zq.hot.curExpect]) {
+                return Promise.resolve()
+            } else {
+                return store.dispatch('home/fetchHotMatches')
+            }
         },
         components: {
             MatchesScroller

@@ -8,7 +8,8 @@
                 <i class="tab-arrow"></i>
                 <!--<i class="tab-arrow"></i>-->
             </a>
-            <nuxt-link to="/home/zq/hot/" :class="{'cur': ~$route.path.indexOf('/hot/')}" replace>精选<i class="tab-arrow"></i></nuxt-link>
+            <nuxt-link to="/home/zq/hot/" :class="{'cur': ~$route.path.indexOf('/hot/')}" replace>精选<i
+                    class="tab-arrow"></i></nuxt-link>
             <a :class="{'cur': ~$route.path.indexOf('/my/')}">我的比赛<i class="tab-arrow"></i></a>
         </div>
 
@@ -16,9 +17,15 @@
             <div class="l-relative" style="z-index: 11;">
                 <div class="ui-navbox-item">
                     <ul>
-                        <li :class="{'select': ~$route.path.indexOf('/jczq/')}"><nuxt-link to="/home/zq/jczq/" replace><span>竞彩足球</span></nuxt-link></li>
-                        <li :class="{'select': ~$route.path.indexOf('/sfc/')}"><nuxt-link to="/home/zq/sfc/" replace><span>胜负彩</span></nuxt-link></li>
-                        <li :class="{'select': ~$route.path.indexOf('/bjdc/')}"><nuxt-link to="/home/zq/bjdc/" replace><span>北京单场</span></nuxt-link></li>
+                        <li :class="{'select': ~$route.path.indexOf('/jczq/')}">
+                            <nuxt-link to="/home/zq/jczq/" replace><span>竞彩足球</span></nuxt-link>
+                        </li>
+                        <li :class="{'select': ~$route.path.indexOf('/sfc/')}">
+                            <nuxt-link to="/home/zq/sfc/" replace><span>胜负彩</span></nuxt-link>
+                        </li>
+                        <li :class="{'select': ~$route.path.indexOf('/bjdc/')}">
+                            <nuxt-link to="/home/zq/bjdc/" replace><span>北京单场</span></nuxt-link>
+                        </li>
                         <li :class="{'select': ~$route.path.indexOf('/all/')}"><span>全部</span></li>
                     </ul>
                 </div>
@@ -47,7 +54,7 @@
 </style>
 <script>
     import NuxtLink from '../../../.nuxt/components/nuxt-link'
-export default {
+    export default {
         components: {NuxtLink},
         data () {
             return {
