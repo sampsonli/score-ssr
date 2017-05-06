@@ -8,6 +8,12 @@
     </div>
 
 </template>
+<style>
+    ._scroll_container, ._scroll_content{
+        overflow: hidden;
+
+    }
+</style>
 <script>
     import {Scroller} from 'scroller'
     export default {
@@ -26,7 +32,7 @@
                 }, {
                     scrollingX: false,
                     scrollingY: true,
-                    bouncing: false,
+//                    bouncing: false,
                     animationDuration: 150
                 })
 

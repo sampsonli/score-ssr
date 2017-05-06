@@ -4,8 +4,8 @@
         <div class="headernav">
             <div class="headernavL"><a onclick="home.back()" class="home-icon">返回</a></div>
             <ul class="toggle-cz">
-                <li :class="{'cur': ~$route.path.indexOf('/zq/')}"><nuxt-link to="/home/zq/bjdc/1" replace>足球</nuxt-link></li>
-                <li :class="{'cur': ~$route.path.indexOf('/lq/')}"><nuxt-link to="/home/lq/jclq/1" replace>篮球</nuxt-link></li>
+                <li :class="{'cur': ~$route.path.indexOf('/zq/')}"><nuxt-link to="/home/zq/jczq/" replace>足球</nuxt-link></li>
+                <li :class="{'cur': ~$route.path.indexOf('/lq/')}"><nuxt-link to="/home/lq/jclq/" replace>篮球</nuxt-link></li>
             </ul>
             <div class="headernavR">
                 <a href="../score/match_center/index.html?from=web_home" class="league-icon"></a>

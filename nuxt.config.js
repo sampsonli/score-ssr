@@ -40,8 +40,8 @@ module.exports = {
         }
     },
     loading: {
-        color: 'green',
-        height: '.06rem',
+        color: '#3366cc',
+        height: '.07rem',
         duration: '2000'
     },
     srcDir: 'app/',

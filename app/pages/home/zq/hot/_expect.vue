@@ -44,14 +44,14 @@
     import Scroller from '~components/Scroller'
     export default {
         fetch ({store}) {
-            return store.dispatch('home/fetchBjdcMatches')
+            return store.dispatch('home/fetchHotMatches')
         },
         components: {
             Scroller
         },
         computed: {
             matches () {
-                return this.$store.state.home.zq.bjdc.allMatches[this.$store.state.home.zq.bjdc.curExpect]
+                return this.$store.state.home.zq.hot.allMatches[this.$store.state.home.zq.hot.curExpect]
             }
         },
         methods: {
