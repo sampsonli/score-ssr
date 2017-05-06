@@ -2,9 +2,9 @@
     <div class="l-full l-flex-column">
         <div class="qi-list-box"><div class="qi-list"><ul class="responsive"><li class="">前一期</li> <li class="qiqh">170501 期<i class="qi-arrow"></i></li> <li class="">后一期</li></ul></div></div>
         <div class="l-flex-1 l-relative">
-            <scroller ref="scroller">
+            <matches-scroller ref="scroller">
                 <ul class="list">
-                    <li v-for="match in matches" class="list-item" v-tap="{methods: goDetail}">
+                    <li v-for="match in matches" class="list-item" v-tap="{methods: goDetail}" :class="{'__first_no_end': match._flag}">
                         <div class="list-tit">
                             <span class="list-day"> {{match.order}}&nbsp;&nbsp;{{match.simpleleague}}</span>
                             <span class="list-state color3">{{match.status_desc}}</span>
@@ -32,7 +32,7 @@
                         <div class="list-info f22"><span>半场 {{match.extra_time_score}}&nbsp;</span></div>
                     </li>
                 </ul>
-            </scroller>
+            </matches-scroller>
         </div>
 
 
@@ -41,13 +41,13 @@
     </div>
 </template>
 <script>
-    import Scroller from '~components/Scroller'
+    import MatchesScroller from '~components/matches_scroller'
     export default {
         fetch ({store}) {
             return store.dispatch('home/fetchJczqMatches')
         },
         components: {
-            Scroller
+            MatchesScroller
         },
         computed: {
             matches () {
@@ -60,7 +60,7 @@
             }
         },
         mounted () {
-            this.$refs.scroller.config()
+//            this.$refs.scroller.config()
         }
     }
 </script>

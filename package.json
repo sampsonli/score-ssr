@@ -19,6 +19,7 @@
     "cross-env": "^4.0.0",
     "express": "^4.14.0",
     "forward-request": "^1.0.1",
+    "iscroll": "^5.2.0",
     "nuxt": "~0.10.6",
     "scroller": "^0.0.3",
     "source-map-support": "^0.4.14",

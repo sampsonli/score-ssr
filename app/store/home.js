@@ -58,6 +58,12 @@ export const actions = {
                 throw new Error(resp.message)
             }
         }).then((data) => {
+            data.matches.some(match => {
+                if (match.status !== '4') {
+                    match._flag = true
+                    return true
+                }
+            })
             if (expect) { // 拥有expect 代表是昨天， 或者明天
                 commit('BJDC_EXPECT', data)
             } else {
@@ -78,6 +84,12 @@ export const actions = {
                 throw new Error(resp.message)
             }
         }).then((data) => {
+            data.matches.some(match => {
+                if (match.status !== '4') {
+                    match._flag = true
+                    return true
+                }
+            })
             if (expect) { // 拥有expect 代表是昨天， 或者明天
                 commit('JCLQ_EXPECT', data)
             } else {
@@ -98,6 +110,12 @@ export const actions = {
                 throw new Error(resp.message)
             }
         }).then((data) => {
+            data.matches.some(match => {
+                if (match.status !== '4') {
+                    match._flag = true
+                    return true
+                }
+            })
             if (expect) { // 拥有expect 代表是昨天， 或者明天
                 commit('JCZQ_EXPECT', data)
             } else {
@@ -118,6 +136,12 @@ export const actions = {
                 throw new Error(resp.message)
             }
         }).then((data) => {
+            data.matches.some(match => {
+                if (match.status !== '4') {
+                    match._flag = true
+                    return true
+                }
+            })
             if (expect) { // 拥有expect 代表是昨天， 或者明天
                 commit('SFC_EXPECT', data)
             } else {
@@ -138,6 +162,12 @@ export const actions = {
                 throw new Error(resp.message)
             }
         }).then((data) => {
+            data.matches.some(match => {
+                if (match.status !== '4') {
+                    match._flag = true
+                    return true
+                }
+            })
             if (expect) { // 拥有expect 代表是昨天， 或者明天
                 commit('HOT_EXPECT', data)
             } else {

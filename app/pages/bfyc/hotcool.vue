@@ -14,7 +14,7 @@
 
 
         <div class="hotc-box l-flex-1 l-relative" v-if="coldHot">
-            <scroller v-if="coldHot.matches.length" ref="scroller">
+            <div v-if="coldHot.matches.length" class="l-full l-scroll-y">
                 <!--冷热列表-->
                 <section class="hotc-cont" v-for="match in coldHot.matches" v-if="match.status !== '4'"
                          v-tap="{methods: goAnalysis, fid: match.fid}">
@@ -88,7 +88,7 @@
                     </ul>
                 </section>
 
-            </scroller>
+            </div>
 
             <prompt v-else type="no-data" tip0="暂无数据"/>
         </div>
@@ -100,11 +100,10 @@
 
 <script type="text/javascript">
     import Prompt from '~components/prompt'
-    import Scroller from '~components/Scroller'
 
     export default{
         components: {
-            Prompt, Scroller
+            Prompt
         },
         fetch ({store}) {
             return store.dispatch('bfyc/fetchColdHotDistribute')
@@ -130,12 +129,6 @@
                 return curStatus
             }
         },
-        mounted () {
-//            alert(this.$refs.scroller)
-//            this.$refs.scroller.$emit('config')
-            this.$refs.scroller.config()
-        },
-
         methods: {
             goAnalysis: function ({fid}) {
                 location.href = `/score/detail.html?odds=bifa#/footballdetail/odds/${fid}`
