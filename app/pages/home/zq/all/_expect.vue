@@ -60,10 +60,10 @@
     import MatchesScroller from '~components/matches_scroller'
     export default {
         fetch ({store, params}) {
-            if (store.state.home.zq.sfc.allMatches[params.expect]) {
+            if (store.state.home.zq.jczq.allMatches[params.expect]) {
                 return Promise.resolve()
             } else {
-                return store.dispatch('home/fetchSfcMatches', params.expect)
+                return store.dispatch('home/fetchZqAllMatches', params.expect)
             }
         },
         data () {
@@ -83,7 +83,7 @@
         },
         computed: {
             matchInfo () {
-                return this.$store.state.home.zq.sfc
+                return this.$store.state.home.zq.all
             },
             matches () {
                 return this.matchInfo.allMatches[this.matchInfo.curExpect]
@@ -103,7 +103,7 @@
                 this.showExpectList = !this.showExpectList
             },
             selectExpect ({expect}) {
-                this.$router.replace(`/home/zq/sfc/${expect}`)
+                this.$router.replace(`/home/zq/all/${expect}`)
             }
         }
     }

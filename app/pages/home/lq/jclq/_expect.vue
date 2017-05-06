@@ -1,6 +1,22 @@
 <template>
     <div class="l-full l-flex-column">
-        <div class="qi-list-box"><div class="qi-list"><ul class="responsive"><li class="">前一期</li> <li class="qiqh">170501 期<i class="qi-arrow"></i></li> <li class="">后一期</li></ul></div></div>
+        <div class="qi-list-box">
+            <div class="qi-list">
+                <ul class="responsive">
+                    <li class="">前一期</li>
+                    <li class="qiqh" v-tap="{methods: toggleExpectList}">{{curExpect}} 期<i class="qi-arrow"></i></li>
+                    <li class="">后一期</li>
+                </ul>
+            </div>
+        </div>
+        <div class="qi-pop-box" style="position: relative;top:0" v-if="showExpectList">
+            <div class="ui-navbox-item">
+                <ul>
+                    <li v-tap="{methods: selectExpect, expect: expect}" :class="{'select': expect === curExpect}" v-for="expect in expectList"><span>{{expect}}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="ui-alert-layer" style="z-index: 8" v-if="showExpectList" v-tap="{methods: toggleExpectList}"></div>
         <div class="l-flex-1 l-relative">
             <matches-scroller ref="scroller">
                 <ul class="list">
@@ -43,28 +59,52 @@
 <script>
     import MatchesScroller from '~components/matches_scroller'
     export default {
-        fetch ({store}) {
-            if (store.state.home.lq.jclq.allMatches[store.state.home.lq.jclq.curExpect]) {
+        fetch ({store, params}) {
+            if (store.state.home.lq.jclq.allMatches[params.expect]) {
                 return Promise.resolve()
             } else {
-                return store.dispatch('home/fetchJclqMatches')
+                return store.dispatch('home/fetchJclqMatches', params.expect)
+            }
+        },
+        data () {
+            return {
+                showExpectList: false
+            }
+        },
+        watch: {
+            curExpect () {
+                if (this.$route.params.expect !== 'cur') {
+                    this.$refs.scroller.config()
+                }
             }
         },
         components: {
             MatchesScroller
         },
         computed: {
+            matchInfo () {
+                return this.$store.state.home.lq.jclq
+            },
             matches () {
-                return this.$store.state.home.lq.jclq.allMatches[this.$store.state.home.lq.jclq.curExpect]
+                return this.matchInfo.allMatches[this.matchInfo.curExpect]
+            },
+            curExpect () {
+                return this.matchInfo.curExpect
+            },
+            expectList () {
+                return this.matchInfo.expectList
             }
         },
         methods: {
             goDetail () {
                 this.$router.push('/bfyc/predict')
+            },
+            toggleExpectList () {
+                this.showExpectList = !this.showExpectList
+            },
+            selectExpect ({expect}) {
+                this.$router.replace(`/home/lq/jclq/${expect}`)
             }
-        },
-        mounted () {
-//            this.$refs.scroller.config()
         }
     }
 </script>
@@ -72,5 +112,9 @@
     .qi-list-box{
         position: relative;
         top: 0;
+    }
+    .list-item{
+        /*overflow: hidden;*/
+        /*transform: translate(0,0);*/
     }
 </style>
