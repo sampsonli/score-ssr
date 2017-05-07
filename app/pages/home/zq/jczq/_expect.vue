@@ -12,9 +12,7 @@
         <div class="qi-pop-box" style="position: relative;top:0" v-if="showExpectList">
             <div class="ui-navbox-item">
                 <ul>
-                    <li v-tap="{methods: selectExpect, expect: expect}" :class="{'select': expect === curExpect}" v-for="expect in expectList">
-                        <span>{{expect}}</span>
-                    </li>
+                    <li v-tap="{methods: selectExpect, expect: expect}" :class="{'select': expect === curExpect}" v-for="expect in expectList"><span>{{expect}}</span></li>
                 </ul>
             </div>
         </div>
@@ -26,8 +24,8 @@
                         <div class="list-tit">
                             <span class="list-day"> {{match.order}}&nbsp;&nbsp;{{match.simpleleague}}</span>
                             <span class="list-state color3">{{match.status_desc}}</span>
-                            <span class="crazy-sports f20">猜球</span>
-                            <span class="list-time">04-25 18:00</span>
+                            <span class="crazy-sports f20" v-if="match.iscrazybet==='1'">猜球</span>
+                            <span class="list-time">{{match.matchtime}}</span>
                         </div>
                         <div class="list-team">
                             <div class="team team-l f30">
