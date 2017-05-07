@@ -31,6 +31,21 @@ config.dev = !(process.env.NODE_ENV === 'production')
 
 // Init Nuxt.js
 const nuxt = new Nuxt(config)
+
+app.use((req, resp, next) => {
+    if (~req.originalUrl.indexOf('.')) {
+        next()
+    } else {
+        nuxt.renderRoute(req.originalUrl).then(({html, error}) => {
+            if (error) {
+                next()
+            } else {
+                resp.send(html)
+            }
+        }).catch(() => next())
+    }
+})
+
 app.use(nuxt.render)
 
 // Build only in dev mode
