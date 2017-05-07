@@ -41,7 +41,7 @@ module.exports = {
     },
     loading: {
         color: '#3366cc',
-        height: '.07rem',
+        height: '.08rem',
         duration: '3000'
     },
     performance: {
