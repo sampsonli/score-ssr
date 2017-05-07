@@ -9,13 +9,17 @@
 
 </template>
 <script>
+
     export default {
         mounted () {
             this.config()
         },
         methods: {
+            raf (cb) {
+                return (window.requestAnimationFrame || (cb => setTimeout(cb, 50 / 3)))(cb)
+            },
             config () {
-                setTimeout(() => {
+                this.raf(() => {
                     const eli = document.querySelector('._scroll_content li')
                     const container = document.querySelector('._scroll_container')
                     const content = document.querySelector('._scroll_content')
@@ -43,24 +47,26 @@
                         this.scrollEndHandler()
                         this.myScroll.on('scrollEnd', this.scrollEndHandler)
                     })
-                }, 0)
+                })
             },
             scrollEndHandler () {
-                const nth = Math.floor(-this.myScroll.y / this.itemHeight)
-                const oneScreenNums = Math.floor(this.containerHeight / this.itemHeight) + 1
-                const lis = document.querySelectorAll('._scroll_content li')
-                const maxNums = lis.length
-                const imgs = []
-                for (let i = 0; i < oneScreenNums && (nth + i < maxNums); i++) {
-                    const tmpImg = lis[nth + i].querySelectorAll('img')
-                    imgs.push(tmpImg[0])
-                    imgs.push(tmpImg[1])
-                }
-                imgs.forEach(img => {
-                    if (img.dataset.inited === '0') {
-                        img.src = img.dataset.src
-                        img.dataset.inited = '1'
+                this.raf(() => {
+                    const imgs = []
+                    const nth = Math.floor(-this.myScroll.y / this.itemHeight)
+                    const oneScreenNums = Math.floor(this.containerHeight / this.itemHeight) + 1
+                    const lis = document.querySelectorAll('._scroll_content li')
+                    const maxNums = lis.length
+                    for (let i = 0; i < oneScreenNums && (nth + i < maxNums); i++) {
+                        const tmpImg = lis[nth + i].querySelectorAll('img')
+                        imgs.push(tmpImg[0])
+                        imgs.push(tmpImg[1])
                     }
+                    imgs.forEach(img => {
+                        if (img.dataset.inited === '0') {
+                            img.src = img.dataset.src
+                            img.dataset.inited = '1'
+                        }
+                    })
                 })
             }
         },
