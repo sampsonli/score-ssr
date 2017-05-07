@@ -10,7 +10,7 @@ module.exports = {
         // First application
         {
             name: 'score',
-            script: 'node build/main.js',
+            script: 'build/main.js',
             env: {
                 COMMON_VARIABLE: 'true'
             },
