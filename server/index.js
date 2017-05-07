@@ -33,7 +33,7 @@ config.dev = !(process.env.NODE_ENV === 'production')
 
 // Init Nuxt.js
 const nuxt = new Nuxt(config)
-app.use(compression())
+// app.use(compression())
 app.use((req, resp, next) => {
     if (~req.originalUrl.indexOf('.')) {
         next()
