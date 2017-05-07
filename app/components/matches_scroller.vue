@@ -52,8 +52,12 @@
             scrollEndHandler () {
                 this.raf(() => {
                     const imgs = []
-                    const nth = Math.floor(-this.myScroll.y / this.itemHeight)
-                    const oneScreenNums = Math.floor(this.containerHeight / this.itemHeight) + 1
+                    let nth = Math.floor(-this.myScroll.y / this.itemHeight)
+                    if (nth > 3) {
+                        nth = nth - 3
+                    }
+                    let oneScreenNums = Math.floor(this.containerHeight / this.itemHeight)
+                    oneScreenNums = oneScreenNums + 5
                     const lis = document.querySelectorAll('._scroll_content li')
                     const maxNums = lis.length
                     for (let i = 0; i < oneScreenNums && (nth + i < maxNums); i++) {
