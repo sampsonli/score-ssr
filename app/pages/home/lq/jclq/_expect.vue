@@ -29,20 +29,20 @@
                         </div>
                         <div class="list-team">
                             <div class="team team-l f30">
-                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_752.png">
-                                {{match.homesxname}}<i class="red-pai f22" style="display: none;">0</i>
+                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1194.png" :data-src="match.awaylogo" data-inited="0">
+                                {{match.awaysxname}}<i class="red-pai f22" style="display: none;">0</i>
                             </div>
                             <div class="team-c color3" v-if="match.status==='4'">
                                 <p class="score">
-                                    <em class="score-itm"><i>{{match.homescore}}</i></em>
-                                    <span class="score-c">:</span>
                                     <em class="score-itm"><i>{{match.awayscore}}</i></em>
+                                    <span class="score-c">:</span>
+                                    <em class="score-itm"><i>{{match.homescore}}</i></em>
                                 </p>
                             </div>
                             <div class="team-c" v-if="match.status!=='4'"><i class="collect"></i></div>
                             <div class="team team-r f30">
-                                {{match.awaysxname}}
-                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png">
+                                {{match.homesxname}}
+                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1194.png" :data-src="match.homelogo" data-inited="0">
                             </div>
                         </div>
                         <div class="list-info f22"><span>半场 {{match.extra_time_score}}&nbsp;</span></div>

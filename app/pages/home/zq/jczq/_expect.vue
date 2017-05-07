@@ -12,7 +12,9 @@
         <div class="qi-pop-box" style="position: relative;top:0" v-if="showExpectList">
             <div class="ui-navbox-item">
                 <ul>
-                    <li v-tap="{methods: selectExpect, expect: expect}" :class="{'select': expect === curExpect}" v-for="expect in expectList"><span>{{expect}}</span></li>
+                    <li v-tap="{methods: selectExpect, expect: expect}" :class="{'select': expect === curExpect}" v-for="expect in expectList">
+                        <span>{{expect}}</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -29,7 +31,7 @@
                         </div>
                         <div class="list-team">
                             <div class="team team-l f30">
-                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_752.png">
+                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1194.png" :data-src="match.homelogo" data-inited="0">
                                 {{match.homesxname}}<i class="red-pai f22" style="display: none;">0</i>
                             </div>
                             <div class="team-c color3" v-if="match.status==='4'">
@@ -42,7 +44,7 @@
                             <div class="team-c" v-if="match.status!=='4'"><i class="collect"></i></div>
                             <div class="team team-r f30">
                                 {{match.awaysxname}}
-                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png">
+                                <img src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1194.png" :data-src="match.awaylogo" data-inited="0">
                             </div>
                         </div>
                         <div class="list-info f22"><span>半场 {{match.extra_time_score}}&nbsp;</span></div>
