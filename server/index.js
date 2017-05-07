@@ -1,6 +1,8 @@
 import Nuxt from 'nuxt'
 import express from 'express'
 import forwardRequest from 'forward-request'
+import compression from 'compression'
+import path from 'path'
 
 // import api from './api'
 
@@ -31,7 +33,7 @@ config.dev = !(process.env.NODE_ENV === 'production')
 
 // Init Nuxt.js
 const nuxt = new Nuxt(config)
-
+app.use(compression())
 app.use((req, resp, next) => {
     if (~req.originalUrl.indexOf('.')) {
         next()
