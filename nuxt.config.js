@@ -42,10 +42,11 @@ module.exports = {
     loading: {
         color: '#3366cc',
         height: '.07rem',
-        duration: '2000'
+        duration: '3000'
     },
-    srcDir: 'app/',
-    generate: {
-        interval: 2000
-    }
+    performance: {
+        prefetch: false,
+        gzip: false
+    },
+    srcDir: 'app/'
 }
