@@ -24,7 +24,7 @@
                         <div class="list-tit">
                             <span class="list-day"> {{match.order}}&nbsp;&nbsp;{{match.simpleleague}}</span>
                             <span class="list-state color3">{{match.status_desc}}</span>
-                            <span class="list-time">{{match.matchtime}}</span>
+                            <span class="list-time">{{match.matchtime.substr(5, 11)}}</span>
                         </div>
                         <div class="list-team">
                             <div class="team team-l f30">
