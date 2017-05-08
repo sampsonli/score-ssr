@@ -1,8 +1,7 @@
 import Nuxt from 'nuxt'
 import express from 'express'
 import forwardRequest from 'forward-request'
-import compression from 'compression'
-import path from 'path'
+// import compression from 'compression'
 
 // import api from './api'
 

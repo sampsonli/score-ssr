@@ -61,9 +61,13 @@
                     const lis = document.querySelectorAll('._scroll_content li')
                     const maxNums = lis.length
                     for (let i = 0; i < oneScreenNums && (nth + i < maxNums); i++) {
-                        const tmpImg = lis[nth + i].querySelectorAll('img')
-                        imgs.push(tmpImg[0])
-                        imgs.push(tmpImg[1])
+                        if (lis[nth + i]) {
+                            const tmpImg = lis[nth + i].querySelectorAll('img')
+                            if (tmpImg && tmpImg.length === 2) {
+                                imgs.push(tmpImg[0])
+                                imgs.push(tmpImg[1])
+                            }
+                        }
                     }
                     imgs.forEach(img => {
                         if (img.dataset.inited === '0') {
