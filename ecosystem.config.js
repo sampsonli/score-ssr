@@ -32,7 +32,10 @@ module.exports = {
             'ssh_options': ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
             repo: 'git@github.com:sampsonli/score-ssr.git',
             path: '/root/project/score_ssr',
-            'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js --env score'
+            'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js',
+            env: {
+                'NODE_ENV': 'production'
+            }
         }
     }
 }

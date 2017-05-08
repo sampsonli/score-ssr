@@ -40,7 +40,7 @@
                     if (this.contentHeight + oTop < this.containerHeight) {
                         oTop = this.containerHeight - this.contentHeight
                     }
-                    if(this.contentHeight <= this.containerHeight){
+                    if (this.contentHeight <= this.containerHeight) {
                         oTop = 0
                     }
                     window.__scroll_path = this.$route.path
