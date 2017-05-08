@@ -37,6 +37,9 @@
                         const firstEndEl = document.querySelector('.__first_no_end')
                         oTop = firstEndEl && firstEndEl.offsetTop ? -(firstEndEl.offsetTop - this.itemHeight) : 0
                     }
+                    if (this.contentHeight + oTop < this.containerHeight) {
+                        oTop = this.containerHeight - this.contentHeight
+                    }
                     window.__scroll_path = this.$route.path
                     import('iscroll').then((IScroll) => {
                         this.myScroll = new IScroll(container, {
