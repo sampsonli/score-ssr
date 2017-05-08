@@ -71,8 +71,8 @@
             }
         },
         watch: {
-            curExpect () {
-                if (this.$route.params.expect !== 'cur') {
+            curExpect (curExpect) {
+                if (curExpect !== 'cur') {
                     this.$refs.scroller.config()
                 }
             }
