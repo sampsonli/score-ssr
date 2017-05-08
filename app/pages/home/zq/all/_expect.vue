@@ -3,9 +3,11 @@
         <div class="qi-list-box">
             <div class="qi-list">
                 <ul class="responsive">
-                    <li class="">前一期</li>
+                    <li class="" v-if="preAndNextExpect.pre"><nuxt-link :to="{path: '/home/zq/all/'+ preAndNextExpect.pre}" replace>前一期</nuxt-link></li>
+                    <li class="" v-else>前一期</li>
                     <li class="qiqh" v-tap="{methods: toggleExpectList}">{{curExpect}} 期<i class="qi-arrow"></i></li>
-                    <li class="">后一期</li>
+                    <li class="" v-if="preAndNextExpect.next"><nuxt-link :to="{path: '/home/zq/all/'+ preAndNextExpect.next}" replace>后一期</nuxt-link></li>
+                    <li class="" v-else>后一期</li>
                 </ul>
             </div>
         </div>
@@ -91,6 +93,18 @@
             curExpect () {
                 return this.matchInfo.curExpect
             },
+            preAndNextExpect () {
+                let result = {}
+                let index = 0
+                this.matchInfo.expectList.some((expect, idx) => {
+                    if (expect === this.curExpect) {
+                        index = idx
+                    }
+                })
+                result.next = this.matchInfo.expectList[index + 1]
+                result.pre = this.matchInfo.expectList[index - 1]
+                return result
+            },
             expectList () {
                 return this.matchInfo.expectList
             }
@@ -116,5 +130,9 @@
     .list-item{
         /*overflow: hidden;*/
         /*transform: translate(0,0);*/
+    }
+    .qi-list-box a {
+        display: block;
+        color: inherit;
     }
 </style>

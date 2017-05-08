@@ -11,11 +11,16 @@ module.exports = {
         {
             name: 'score',
             script: './build/main.js',
+            kill_timeout: 3000,
             env: {
-                COMMON_VARIABLE: 'true'
+                NODE_ENV: 'development',
+                PORT: 3001,
+                HOST: '0.0.0.0'
             },
             env_production: {
-                NODE_ENV: 'production'
+                NODE_ENV: 'production',
+                PORT: 3000,
+                HOST: '0.0.0.0'
             }
         }
     ],
@@ -29,13 +34,19 @@ module.exports = {
             user: 'root',
             host: 'wxminapp.com',
             ref: 'origin/master',
-            'ssh_options': ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
+            ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
             repo: 'git@github.com:sampsonli/score-ssr.git',
             path: '/root/project/score_ssr',
-            'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js',
-            env: {
-                'NODE_ENV': 'production'
-            }
+            'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
+        },
+        development: {
+            user: 'root',
+            host: 'wxminapp.com',
+            ref: 'origin/dev',
+            ssh_options: ['StrictHostKeyChecking=no', 'PasswordAuthentication=no'],
+            repo: 'git@github.com:sampsonli/score-ssr.git',
+            path: '/root/project/score_ssr_dev',
+            'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js'
         }
     }
 }
