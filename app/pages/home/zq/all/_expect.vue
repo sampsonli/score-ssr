@@ -76,7 +76,7 @@
                     filteredMatches: allMatches[expect]
                 }
             } else {
-                let { matches } = await store.dispatch('home/fetchAllMatches', expect)
+                let { matches } = await store.dispatch('home/fetchZqAllMatches', expect)
                 return {
                     filteredMatches: matches
                 }
