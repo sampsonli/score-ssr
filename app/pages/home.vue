@@ -1,5 +1,5 @@
 <template>
-    <div class="l-full l-flex-column">
+    <div class="l-full l-flex-column" style="overflow: hidden">
         <!--head begin-->
         <div class="headernav">
             <div class="headernavL"><a onclick="home.back()" class="home-icon">返回</a></div>
