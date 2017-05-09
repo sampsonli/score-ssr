@@ -22,7 +22,7 @@
         <div class="l-flex-1 l-relative">
             <matches-scroller ref="scroller">
                 <ul class="list">
-                    <li v-for="match in matches" class="list-item" v-tap="{methods: goDetail}" :class="{'__first_no_end': match._flag}">
+                    <li v-for="match in filteredMatches" class="list-item" v-tap="{methods: goDetail}" :class="{'__first_no_end': match._flag}">
                         <div class="list-tit">
                             <span class="list-day"> {{match.order}}&nbsp;&nbsp;{{match.simpleleague}}</span>
                             <span class="list-state color3">{{match.status_desc}}</span>
@@ -57,19 +57,27 @@
 
     </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
     import MatchesScroller from '~components/matches_scroller'
     export default {
-        fetch ({store, params}) {
-            if (store.state.home.lq.jclq.allMatches[params.expect]) {
-                return Promise.resolve()
+        async asyncData ({store, params}) {
+            let allMatches = store.state.home.lq.jclq.allMatches
+            let {expect} = params
+            if (allMatches[expect]) {
+                return {
+                    filteredMatches: allMatches[expect]
+                }
             } else {
-                return store.dispatch('home/fetchJclqMatches', params.expect)
+                let { matches } = await store.dispatch('home/fetchJclqMatches', expect)
+                return {
+                    filteredMatches: matches
+                }
             }
         },
         data () {
             return {
-                showExpectList: false
+                showExpectList: false,
+                selectOptions: null
             }
         },
         watch: {
@@ -77,12 +85,32 @@
                 if (curExpect !== 'cur') {
                     this.$refs.scroller.config()
                 }
+            },
+            beginFilter (begin) {
+                if (begin) {
+                    this.$store.dispatch('home/startFilter', {
+                        matches: this.matches,
+                        inited: this.selectOptions,
+                        onOk: ({selectOptions, filteredMatches}) => {
+                            this.filteredMatches = filteredMatches
+                            this.selectOptions = selectOptions
+                            this.$store.dispatch('home/finishFilter')
+                            this.$refs.scroller.config()
+                        },
+                        onCancel: () => {
+                            this.$store.dispatch('home/finishFilter')
+                        }
+                    })
+                }
             }
         },
         components: {
             MatchesScroller
         },
         computed: {
+            beginFilter () {
+                return this.$store.state.home.filter.begin
+            },
             matchInfo () {
                 return this.$store.state.home.lq.jclq
             },

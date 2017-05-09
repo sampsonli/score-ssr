@@ -89,9 +89,6 @@
             }
         },
         watch: {
-            matches (matches) {
-                this.filteredMatches = matches
-            },
             curExpect (curExpect) {
                 if (curExpect !== 'cur') {
                     this.$refs.scroller.config()

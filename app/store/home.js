@@ -210,7 +210,7 @@ export const actions = {
 
 export const mutations = {
     BEGIN_FILTER (state) {
-        state.filter.begin = true
+        state.filter.begin = !state.filter.begin
     },
     INIT_FILTER (state, {matches, inited, onOk, onCancel}) {
         state.filter.matches = matches
