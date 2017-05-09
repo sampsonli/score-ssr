@@ -23,7 +23,7 @@
                     const eli = document.querySelector('._scroll_content li')
                     const container = document.querySelector('._scroll_container')
                     const content = document.querySelector('._scroll_content')
-                    if(!content) return
+                    if (!content) return
                     this.itemHeight = eli.offsetHeight
                     this.contentHeight = content.offsetHeight
                     this.containerHeight = container.offsetHeight
