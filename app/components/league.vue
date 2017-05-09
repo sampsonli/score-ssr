@@ -1,13 +1,13 @@
 <template>
-    <div class="saixuan-box saixuan-show l-full l-flex-column" style="z-index: 100">
+    <div class="saixuan-box saixuan-show l-full l-flex-column" style="z-index: 10">
         <div class="red-head">筛选</div>
         <div class="sll-bs" v-if="!filteredMatches.length">所有联赛，共<span class="red">{{matches.length}}</span>场比赛</div>
         <div class="sll-bs" v-else>你已选<span class="red">{{filteredMatches.length}}</span>场比赛</div>
         <div class="saixuan-tab-box" style="margin-bottom: .2rem">
             <ul class="saixuan-tab responsive">
-                <li @click="selectAll()">全选</li>
-                <li @click="inverseAll">反选</li>
-                <li @click="selectFiveLeague()">五大联赛</li>
+                <li v-tap="{methods: selectAll}">全选</li>
+                <li v-tap="{methods: inverseAll}">反选</li>
+                <li v-tap="{methods: selectFiveLeague}">五大联赛</li>
             </ul>
         </div>
         <div class="l-flex-1 l-relative">
@@ -20,8 +20,8 @@
         <div class="saixuan-footer">
             <div class="saixuan-footer-fixed">
                 <ul class="btn-sx responsive">
-                    <li class="white-btn" @click="cancel()">取消</li>
-                    <li class="red-btn" @click="confirm()">确定</li>
+                    <li class="white-btn" v-tap="{methods: cancel}">取消</li>
+                    <li class="red-btn" v-tap="{methods: confirm}">确定</li>
                 </ul>
             </div>
         </div>

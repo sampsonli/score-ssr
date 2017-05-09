@@ -46,7 +46,7 @@ module.exports = {
     },
     performance: {
         prefetch: false,
-        gzip: false
+        gzip: true
     },
     srcDir: 'app/'
 }

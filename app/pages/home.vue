@@ -39,6 +39,16 @@
     .headernav {
         position: relative;
     }
+    .slide-enter-active, .slide-leave-active {
+        transition: transform .3s ease;
+    }
+    .slide-enter-active, .slide-leave {
+        transform: translate(0, 0);
+    }
+
+    .slide-leave-active, .slide-enter {
+        transform: translate(0, 100%);
+    }
 </style>
 
 <script>

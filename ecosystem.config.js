@@ -2,19 +2,14 @@
  * Created by sampson on 2017/5/7.
  */
 module.exports = {
-    /**
-     * Application configuration section
-     * http://pm2.keymetrics.io/docs/usage/application-declaration/
-     */
     apps: [
-        // First application
         {
             name: 'score',
             script: './build/main.js',
             kill_timeout: 3000,
             env: {
                 NODE_ENV: 'development',
-                PORT: 3001,
+                PORT: 3000,
                 HOST: '0.0.0.0'
             },
             env_production: {
@@ -24,11 +19,6 @@ module.exports = {
             }
         }
     ],
-
-    /**
-     * Deployment section
-     * http://pm2.keymetrics.io/docs/usage/deployment/
-     */
     deploy: {
         production: {
             user: 'root',
