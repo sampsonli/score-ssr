@@ -3,6 +3,14 @@
  */
 import axios from '~plugins/axios'
 export const state = {
+    filter: {
+        begin: false,
+        show: false,
+        matches: null,
+        init: null,
+        onOk: () => {},
+        onCancel: () => {}
+    },
     zq: {
         bjdc: {
             expectList: null,
@@ -188,10 +196,37 @@ export const actions = {
             commit('HOT', data)
             return data
         })
+    },
+    triggerFilter ({commit}) {
+        commit('BEGIN_FILTER')
+    },
+    startFilter ({commit}, {matches, inited, onOk, onCancel}) {
+        commit('INIT_FILTER', {matches, inited, onOk, onCancel})
+    },
+    finishFilter ({commit}) {
+        commit('END_FILTER')
     }
 }
 
 export const mutations = {
+    BEGIN_FILTER (state) {
+        state.filter.begin = true
+    },
+    INIT_FILTER (state, {matches, inited, onOk, onCancel}) {
+        state.filter.matches = matches
+        state.filter.show = true
+        state.filter.inited = inited
+        state.filter.onOk = onOk || (() => {})
+        state.filter.onCancel = onCancel || (() => {})
+    },
+    END_FILTER (state) {
+        state.filter.matches = null
+        state.filter.show = false
+        state.filter.begin = false
+        state.filter.inited = null
+        state.filter.onOk = () => {}
+        state.filter.onCancel = () => {}
+    },
     BJDC (state, data) {
         let {curr_expect, expect_list, matches, _expect} = data
         // eslint-disable-next-line

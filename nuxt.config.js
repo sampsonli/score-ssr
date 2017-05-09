@@ -3,11 +3,11 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: '足球比分-500彩票网',
+        title: '竞彩足球比分,即时比分_竞足比分_500彩票网',
         meta: [
             {charset: 'utf-8'},
             // { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            {hid: 'description', name: 'description', content: 'Nuxt.js project'}
+            {hid: 'description', name: 'description', content: '500彩票网竞足比分为您提供各热门赛事的竞彩比分直播、足彩即时比分直播、单场即时比分直播、足球即时比分、开赛时间等信息。'}
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
