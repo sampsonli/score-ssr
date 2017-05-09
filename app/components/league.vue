@@ -1,5 +1,5 @@
 <template>
-    <div class="saixuan-box saixuan-show">
+    <div class="saixuan-box saixuan-show l-full" style="z-index: 100">
         <div class="saix-h">
             <div class="saix-fixed">
                 <div class="red-head">筛选</div>
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui-navbox-item sx-bg-t">
+        <div class="ui-navbox-item sx-bg-t l-scroll-y">
             <ul>
                 <li :class="{select:selectOptions[league]}" v-for="league in leagueNameList"><span v-tap="{methods: toggleLeague, league: league}">{{league}}</span></li>
             </ul>
