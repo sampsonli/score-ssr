@@ -32,7 +32,7 @@
                         this.myScroll = null
                     }
                     let oTop
-                    if (window.__scroll_path === this.$route.path && window.__scroll_position) {
+                    if (window.__scroll_path === this.$route.path.split('?_t')[0] && window.__scroll_position) {
                         oTop = window.__scroll_position
                     } else {
                         const firstEndEl = document.querySelector('.__first_no_end')
@@ -44,7 +44,7 @@
                     if (this.contentHeight <= this.containerHeight) {
                         oTop = 0
                     }
-                    window.__scroll_path = this.$route.path
+                    window.__scroll_path = this.$route.path.split('?_t')[0]
                     import('iscroll').then((IScroll) => {
                         this.myScroll = new IScroll(container, {
                             deceleration: 0.003,
