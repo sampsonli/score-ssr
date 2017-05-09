@@ -39,11 +39,7 @@ module.exports = {
             }
         }
     },
-    loading: {
-        color: '#3366cc',
-        height: '.08rem',
-        duration: '3000'
-    },
+    loading: '~components/refreshbox.vue',
     performance: {
         prefetch: false,
         gzip: true
