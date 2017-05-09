@@ -96,13 +96,16 @@
                             this.filteredMatches = filteredMatches
                             this.selectOptions = selectOptions
                             this.$store.dispatch('home/finishFilter')
-                            this.$refs.scroller.config()
+//                            this.$refs.scroller.config()
                         },
                         onCancel: () => {
                             this.$store.dispatch('home/finishFilter')
                         }
                     })
                 }
+            },
+            filteredMatches () {
+                this.$refs.scroller.config()
             }
         },
         components: {
