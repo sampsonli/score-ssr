@@ -40,13 +40,16 @@
         position: relative;
     }
     .slide-enter-active, .slide-leave-active {
+        -webkit-transition: -webkit-transform .3s ease;
         transition: transform .3s ease;
     }
     .slide-enter-active, .slide-leave {
+        -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
     .slide-leave-active, .slide-enter {
+        -webkit-transform: translate(0, 100%);
         transform: translate(0, 100%);
     }
 </style>
