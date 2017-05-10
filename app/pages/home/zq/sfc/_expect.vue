@@ -68,11 +68,11 @@
     import MatchesScroller from '~components/matches_scroller'
     import NuxtLink from '../../../../../.nuxt/components/nuxt-link'
     export default {
-        async asyncData ({store, params, query}) {
+        async asyncData ({store, params}) {
             let allMatches = store.state.home.zq.sfc.allMatches
             let {expect} = params
             expect = expect || 'cur'
-            if (allMatches[expect] && !query._t) {
+            if (allMatches[expect]) {
                 return {
                     filteredMatches: allMatches[expect]
                 }

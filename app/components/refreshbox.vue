@@ -9,16 +9,13 @@
         }),
         methods: {
             update () {
-                this.$router.replace(this.$route.path + '?_t=' + Date.now())
+
             },
             start () {
                 this.loading = true
             },
             finish () {
                 this.loading = false
-                setTimeout(() => {
-                    this.$router.replace(this.$route.path.split('?_t=')[0])
-                }, 16.5)
             }
         }
     }

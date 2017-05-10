@@ -60,11 +60,11 @@
 <script type="text/ecmascript-6">
     import MatchesScroller from '~components/matches_scroller'
     export default {
-        async asyncData ({store, params, query}) {
+        async asyncData ({store, params}) {
             let allMatches = store.state.home.lq.jclq.allMatches
             let {expect} = params
             expect = expect || 'cur'
-            if (allMatches[expect] && !query._t) {
+            if (allMatches[expect]) {
                 return {
                     filteredMatches: allMatches[expect]
                 }
